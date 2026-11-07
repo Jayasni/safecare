@@ -8,6 +8,7 @@ import LoginPage from './features/auth/pages/LoginPage';
 import RegisterPage from './features/auth/pages/RegisterPage';
 import CustomerDashboardPage from './features/dashboard/pages/CustomerDashboardPage';
 import AdminDashboardPage from './features/dashboard/pages/AdminDashboardPage';
+import AdminBookingsPage from './features/dashboard/pages/AdminBookingsPage';
 import ServicesPage from './features/services/pages/ServicesPage';
 import ServiceAvailabilityPage from './features/services/pages/ServiceAvailabilityPage';
 import AdminServicesPage from './features/services/pages/AdminServicesPage';
@@ -105,6 +106,16 @@ export default function App() {
               <AdminRoute>
                 <AdminDashboardLayout>
                   <AdminAvailabilityPage />
+                </AdminDashboardLayout>
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/bookings"
+            element={
+              <AdminRoute>
+                <AdminDashboardLayout>
+                  <AdminBookingsPage />
                 </AdminDashboardLayout>
               </AdminRoute>
             }

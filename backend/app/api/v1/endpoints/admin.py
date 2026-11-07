@@ -8,9 +8,15 @@ from app.db.session import get_db
 from app.models.enums import BookingStatus
 from app.models.user import User
 from app.schemas.booking import BookingResponse
+from app.services.admin_service import AdminService
 from app.services.booking_service import BookingService
 
 router = APIRouter(prefix="/admin", tags=["Admin Bookings"])
+
+
+@router.get("/dashboard")
+def admin_dashboard(db: Session = Depends(get_db), admin: User = Depends(require_admin)):
+    return AdminService(db).dashboard_summary()
 
 
 @router.get("/bookings", response_model=list[BookingResponse])

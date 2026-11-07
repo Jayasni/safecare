@@ -6,9 +6,18 @@ export default function AdminServicesPage() {
   const [form, setForm] = useState({ name: '', description: '', duration_minutes: 30, price: 100, is_active: true });
   const [error, setError] = useState('');
 
+  const handleToggle = async (service) => {
+    try {
+      await api.patch(`/services/${service.id}/status`, null, { params: { is_active: !service.is_active } });
+      await load();
+    } catch {
+      setError('Unable to update service status.');
+    }
+  };
+
   const load = async () => {
     try {
-      const response = await api.get('/services');
+      const response = await api.get('/services', { params: { active_only: false } });
       setServices(response.data);
     } catch {
       setError('Unable to load services.');
@@ -57,12 +66,23 @@ export default function AdminServicesPage() {
       </form>
       <div className="space-y-3">
         {services.map((service) => (
-          <div key={service.id} className="rounded border border-slate-200 bg-white p-4 shadow-sm">
-            <p className="font-medium text-slate-900">{service.name}</p>
-            <p className="text-sm text-slate-600">{service.description}</p>
+          <div key={service.id} className="flex items-center justify-between rounded border border-slate-200 bg-white p-4 shadow-sm">
+            <div>
+              <p className="font-medium text-slate-900">{service.name}</p>
+              <p className="text-sm text-slate-600">{service.description}</p>
+              <p className="text-xs text-slate-500">Active: {String(service.is_active)}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleToggle(service)}
+              className="rounded-md border border-border px-3 py-1 text-sm text-primary hover:bg-primary-light"
+            >
+              {service.is_active ? 'Deactivate' : 'Activate'}
+            </button>
           </div>
         ))}
       </div>
     </main>
   );
 }
+

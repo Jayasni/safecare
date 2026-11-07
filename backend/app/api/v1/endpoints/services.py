@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
-from app.core.dependencies import require_admin
+from app.core.dependencies import get_optional_current_user, require_admin
 from app.db.session import get_db
+from app.models.enums import UserRole
 from app.models.user import User
 from app.schemas.provider import ProviderCreate, ProviderResponse, ProviderUpdate
 from app.schemas.service import ServiceCreate, ServiceResponse, ServiceUpdate
@@ -20,9 +21,12 @@ def handle_value_error(exc: ValueError):
 def list_services(
     active_only: bool = Query(default=True),
     db: Session = Depends(get_db),
+    current_user = Depends(get_optional_current_user),
 ):
-    # Public listing is always active-only. Admin management can extend this later.
-    return ServiceService(db).list_services(active_only=True)
+    is_admin = current_user is not None and current_user.role == UserRole.admin
+    if active_only is False and not is_admin:
+        active_only = True
+    return ServiceService(db).list_services(active_only=active_only)
 
 
 @router.get("/services/{service_id}", response_model=ServiceResponse)
