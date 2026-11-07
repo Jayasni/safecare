@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    image: sagecare-backend:latest
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: /api/v1
+    image: sagecare-frontend:latest
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+# The application uses the developer's local PostgreSQL installation by default.
+# Create backend/.env from backend/.env.example and set DATABASE_URL before running.
+# For a separate containerized database, add a PostgreSQL service and update DATABASE_URL.
