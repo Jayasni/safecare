@@ -14,6 +14,14 @@ class AvailabilityRepository:
     def get_by_id(self, slot_id: int) -> AvailabilitySlot | None:
         return self.db.get(AvailabilitySlot, slot_id)
 
+    def get_by_id_for_update(self, slot_id: int) -> AvailabilitySlot | None:
+        return (
+            self.db.query(AvailabilitySlot)
+            .filter(AvailabilitySlot.id == slot_id)
+            .with_for_update()
+            .first()
+        )
+
     def list(
         self,
         *,

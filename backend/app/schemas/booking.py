@@ -3,6 +3,7 @@ from datetime import datetime
 from pydantic import Field
 
 from app.models.enums import BookingStatus
+from app.schemas.availability import AvailabilitySlotResponse
 from app.schemas.common import ORMModel
 
 
@@ -20,6 +21,7 @@ class BookingResponse(ORMModel):
     booking_reference: str
     user_id: int
     slot_id: int
+    slot: AvailabilitySlotResponse
     status: BookingStatus
     reason: str | None = None
     created_at: datetime
