@@ -26,7 +26,7 @@ uvicorn app.main:app --reload
 ```
 
 ### Environment
-- Copy `backend/.env.example` to `backend/.env` and set your PostgreSQL password (database name: `sagecare_db`).
+- Copy `backend/.env.example` to `backend/.env` and set your PostgreSQL password (database name: `Sagecare_db`).
 - Copy `frontend/.env.example` to `frontend/.env` if needed.
 
 ### API Docs

@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     APP_ENV: str = "development"
     DEBUG: bool = False
 
-    DATABASE_URL: str = "postgresql://postgres:YOUR_PASSWORD@localhost:5432/sagecare_db"
+    DATABASE_URL: str = "postgresql://postgres:YOUR_PASSWORD@localhost:5432/Sagecare_db"
 
     SECRET_KEY: str = "CHANGE_THIS_TO_A_SECURE_RANDOM_SECRET"
     ALGORITHM: str = "HS256"
