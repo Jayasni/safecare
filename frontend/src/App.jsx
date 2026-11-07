@@ -1,6 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { AdminRoute, ProtectedRoute } from './components/common/ProtectedRoute';
+import { AdminDashboardLayout } from './components/layout/AdminDashboardLayout';
+import { CustomerDashboardLayout } from './components/layout/CustomerDashboardLayout';
+import { PublicLayout } from './components/layout/PublicLayout';
 import LoginPage from './features/auth/pages/LoginPage';
 import RegisterPage from './features/auth/pages/RegisterPage';
 import CustomerDashboardPage from './features/dashboard/pages/CustomerDashboardPage';
@@ -9,38 +12,90 @@ import ServicesPage from './features/services/pages/ServicesPage';
 import ServiceAvailabilityPage from './features/services/pages/ServiceAvailabilityPage';
 import AdminServicesPage from './features/services/pages/AdminServicesPage';
 import AdminAvailabilityPage from './features/availability/pages/AdminAvailabilityPage';
+import MyBookingsPage from './features/appointments/pages/MyBookingsPage';
+import BookingDetailsPage from './features/appointments/pages/BookingDetailsPage';
+import ProfilePage from './features/profile/pages/ProfilePage';
+
+function HomePage() {
+  return (
+    <div className="mx-auto max-w-5xl p-6">
+      <h1 className="text-3xl font-semibold text-heading">Welcome to SageCare Booking</h1>
+      <p className="mt-3 text-muted">Find and manage your appointments online.</p>
+    </div>
+  );
+}
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<p className="p-6 text-slate-700">SageCare Booking</p>} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/services/:id" element={<ServiceAvailabilityPage />} />
+          </Route>
+
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <CustomerDashboardPage />
+                <CustomerDashboardLayout>
+                  <CustomerDashboardPage />
+                </CustomerDashboardLayout>
               </ProtectedRoute>
             }
           />
           <Route
+            path="/my-bookings"
+            element={
+              <ProtectedRoute>
+                <CustomerDashboardLayout>
+                  <MyBookingsPage />
+                </CustomerDashboardLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bookings/:id"
+            element={
+              <ProtectedRoute>
+                <CustomerDashboardLayout>
+                  <BookingDetailsPage />
+                </CustomerDashboardLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <CustomerDashboardLayout>
+                  <ProfilePage />
+                </CustomerDashboardLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path="/admin"
             element={
               <AdminRoute>
-                <AdminDashboardPage />
+                <AdminDashboardLayout>
+                  <AdminDashboardPage />
+                </AdminDashboardLayout>
               </AdminRoute>
             }
           />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/services/:id" element={<ServiceAvailabilityPage />} />
           <Route
             path="/admin/services"
             element={
               <AdminRoute>
-                <AdminServicesPage />
+                <AdminDashboardLayout>
+                  <AdminServicesPage />
+                </AdminDashboardLayout>
               </AdminRoute>
             }
           />
@@ -48,7 +103,9 @@ export default function App() {
             path="/admin/availability"
             element={
               <AdminRoute>
-                <AdminAvailabilityPage />
+                <AdminDashboardLayout>
+                  <AdminAvailabilityPage />
+                </AdminDashboardLayout>
               </AdminRoute>
             }
           />
