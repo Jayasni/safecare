@@ -5,6 +5,10 @@ import LoginPage from './features/auth/pages/LoginPage';
 import RegisterPage from './features/auth/pages/RegisterPage';
 import CustomerDashboardPage from './features/dashboard/pages/CustomerDashboardPage';
 import AdminDashboardPage from './features/dashboard/pages/AdminDashboardPage';
+import ServicesPage from './features/services/pages/ServicesPage';
+import ServiceAvailabilityPage from './features/services/pages/ServiceAvailabilityPage';
+import AdminServicesPage from './features/services/pages/AdminServicesPage';
+import AdminAvailabilityPage from './features/availability/pages/AdminAvailabilityPage';
 
 export default function App() {
   return (
@@ -27,6 +31,24 @@ export default function App() {
             element={
               <AdminRoute>
                 <AdminDashboardPage />
+              </AdminRoute>
+            }
+          />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:id" element={<ServiceAvailabilityPage />} />
+          <Route
+            path="/admin/services"
+            element={
+              <AdminRoute>
+                <AdminServicesPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/availability"
+            element={
+              <AdminRoute>
+                <AdminAvailabilityPage />
               </AdminRoute>
             }
           />
