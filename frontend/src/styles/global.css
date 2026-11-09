@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* ================================
+   HEALORA DESIGN SYSTEM
+================================ */
+
+:root {
+  --ivory: #F5F3EB;
+  --sage: #78917B;
+  --sage-dark: #607A65;
+  --dark-green: #29352D;
+  --secondary: #69766B;
+  --light-sage: #E5ECE4;
+  --white: #FFFFFF;
+  --border: #DDE3DA;
+  --success: #4F8A62;
+  --warning: #D6A34D;
+  --danger: #C65D5D;
+
+  --shadow-sm: 0 2px 10px rgba(41, 53, 45, 0.05);
+  --shadow-md: 0 8px 25px rgba(41, 53, 45, 0.08);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Inter, "Segoe UI", sans-serif;
+  background: var(--ivory);
+  color: var(--dark-green);
+  line-height: 1.6;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(1180px, 92%);
+  margin: 0 auto;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-heading {
+  color: var(--dark-green);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-description {
+  color: var(--secondary);
+  max-width: 620px;
+  margin-top: 12px;
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--sage);
+  color: var(--white);
+  padding: 13px 23px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.primary-btn:hover {
+  background: var(--sage-dark);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border: 1px solid var(--sage);
+  color: var(--sage-dark);
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.secondary-btn:hover {
+  background: var(--light-sage);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 55px 0;
+  }
+}

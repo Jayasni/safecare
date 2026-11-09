@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, system-ui, sans-serif;
+
+  --color-ivory: #F5F3EB;
+  --color-sage: #78917B;
+  --color-dark-green: #29352D;
+  --color-secondary: #69766B;
+  --color-light-sage: #E5ECE4;
+  --color-white: #FFFFFF;
+  --color-border: #DDE3DA;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ivory);
+  color: var(--color-dark-green);
+}
